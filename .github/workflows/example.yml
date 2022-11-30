@@ -1,0 +1,47 @@
+name: example
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+  
+
+jobs:
+  random:
+    name: Generate Random Number
+    runs-on: ubuntu-latest
+    
+    outputs:
+      NUMBER_2: ${{ steps.randomNumber2.outputs.NUMBER_2 }}
+      
+    steps:
+      - name: Random number1
+        id: randomNumber1
+        run: echo "NUMBER_1=$((RANDOM))" >> $GITHUB_ENV
+        shell: bash
+       
+      - name: Random number2
+        id: randomNumber2
+        run: echo "NUMBER_2=$((RANDOM))" >> $GITHUB_OUTPUT
+        shell: bash
+        
+      - name: Cancelling
+        id: cancel
+        if: env.NUMBER_1 >= '0'
+        run: echo "Cancelling ${{ env.NUMBER_1 }}"
+        shell: bash
+        
+  display:
+    name: Display Random Number
+    runs-on: ubuntu-latest
+    needs: random
+    
+    steps:
+      
+      - name: Display Random Number 2
+        id: display
+        run: echo "Random Number is ${{ needs.random.outputs.NUMBER_2 }}"
+        shell: bash
+    
+    
+        
