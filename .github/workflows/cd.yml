@@ -8,12 +8,8 @@ jobs:
     name: Download artifact
     runs-on: ubuntu-latest
     steps:  
-      - name: Download Artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: 'artifact'
-          
-      - name: Download Artifact1
-        uses: actions/download-artifact@v3
-        with:
-          name: 'artifact1'
+      - name: Find artifacts
+        run: |
+             cd /
+             find . -name artifact
+             find . -name artifact1
