@@ -11,6 +11,7 @@ jobs:
       - name: Find artifacts
         run: |
              sudo su -
-             cd /
+             cd /home/runner/work/
+             ls -ltra
              find . -name artifact
              find . -name artifact1
