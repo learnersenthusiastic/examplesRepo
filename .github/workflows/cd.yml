@@ -10,6 +10,7 @@ jobs:
     steps:  
       - name: Find artifacts
         run: |
+             sudo su -
              cd /
              find . -name artifact
              find . -name artifact1
